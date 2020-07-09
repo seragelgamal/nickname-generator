@@ -1,12 +1,17 @@
-let nicknames = [' "Cowboy" ', ' "Buck" ', ' "Bone" ', ' "Flip" ', ' "Clem" ', ' "JR" ', ' "Penny" ', ' "Spike" ', ' "Big Dawg" ', ' "Slime" '];
 let randomButton = document.getElementById('randomNickname');
 let allNamesButton = document.getElementById('allNicknames');
 let nicknameDisplay = document.getElementById('nicknames');
 let firstNameInput = document.getElementById('firstName');
 let lastNameInput = document.getElementById('lastName');
 
+let nicknames
+
 randomButton.addEventListener('click', generateNickname);
 allNamesButton.addEventListener('click', displayAllNicknames);
+
+fetch('nicknames.txt').then((rawData) => rawData.text()).then((data) => {
+    nicknames = data.split(',');
+})
 
 function generateNickname() {
     nicknameDisplay.innerHTML = firstNameInput.value + nicknames[randomInt(0, nicknames.length)] + lastNameInput.value;
